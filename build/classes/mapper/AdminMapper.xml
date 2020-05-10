@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tourism.mapper.AdminMapper" >
+  <resultMap id="BaseResultMap" type="com.tourism.pojo.Admin" >
+    <id column="admin_id" property="adminId" jdbcType="INTEGER" />
+    <result column="admin_account" property="adminAccount" jdbcType="VARCHAR" />
+    <result column="admin_password" property="adminPassword" jdbcType="VARCHAR" />
+    <result column="admin_nickname" property="adminNickname" jdbcType="VARCHAR" />
+    <result column="admin_photo" property="adminPhoto" jdbcType="VARCHAR" />
+    <result column="admin_phone" property="adminPhone" jdbcType="VARCHAR" />
+    <result column="admin_email" property="adminEmail" jdbcType="VARCHAR" />
+    <result column="admin_question" property="adminQuestion" jdbcType="VARCHAR" />
+    <result column="admin_answer" property="adminAnswer" jdbcType="VARCHAR" />
+    <result column="admin_address" property="adminAddress" jdbcType="VARCHAR" />
+    <result column="admin_money" property="adminMoney" jdbcType="REAL" />
+    <result column="admin_regtime" property="adminRegtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    admin_id, admin_account, admin_password, admin_nickname, admin_photo, admin_phone, 
+    admin_email, admin_question, admin_answer, admin_address, admin_money, admin_regtime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tourism.pojo.AdminExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from admin
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from admin
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from admin
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tourism.pojo.AdminExample" >
+    delete from admin
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tourism.pojo.Admin" >
+    insert into admin (admin_id, admin_account, admin_password, 
+      admin_nickname, admin_photo, admin_phone, 
+      admin_email, admin_question, admin_answer, 
+      admin_address, admin_money, admin_regtime
+      )
+    values (#{adminId,jdbcType=INTEGER}, #{adminAccount,jdbcType=VARCHAR}, #{adminPassword,jdbcType=VARCHAR}, 
+      #{adminNickname,jdbcType=VARCHAR}, #{adminPhoto,jdbcType=VARCHAR}, #{adminPhone,jdbcType=VARCHAR}, 
+      #{adminEmail,jdbcType=VARCHAR}, #{adminQuestion,jdbcType=VARCHAR}, #{adminAnswer,jdbcType=VARCHAR}, 
+      #{adminAddress,jdbcType=VARCHAR}, #{adminMoney,jdbcType=REAL}, #{adminRegtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tourism.pojo.Admin" >
+    insert into admin
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="adminId != null" >
+        admin_id,
+      </if>
+      <if test="adminAccount != null" >
+        admin_account,
+      </if>
+      <if test="adminPassword != null" >
+        admin_password,
+      </if>
+      <if test="adminNickname != null" >
+        admin_nickname,
+      </if>
+      <if test="adminPhoto != null" >
+        admin_photo,
+      </if>
+      <if test="adminPhone != null" >
+        admin_phone,
+      </if>
+      <if test="adminEmail != null" >
+        admin_email,
+      </if>
+      <if test="adminQuestion != null" >
+        admin_question,
+      </if>
+      <if test="adminAnswer != null" >
+        admin_answer,
+      </if>
+      <if test="adminAddress != null" >
+        admin_address,
+      </if>
+      <if test="adminMoney != null" >
+        admin_money,
+      </if>
+      <if test="adminRegtime != null" >
+        admin_regtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="adminId != null" >
+        #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="adminAccount != null" >
+        #{adminAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="adminPassword != null" >
+        #{adminPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="adminNickname != null" >
+        #{adminNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="adminPhoto != null" >
+        #{adminPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="adminPhone != null" >
+        #{adminPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="adminEmail != null" >
+        #{adminEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="adminQuestion != null" >
+        #{adminQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="adminAnswer != null" >
+        #{adminAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="adminAddress != null" >
+        #{adminAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="adminMoney != null" >
+        #{adminMoney,jdbcType=REAL},
+      </if>
+      <if test="adminRegtime != null" >
+        #{adminRegtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tourism.pojo.AdminExample" resultType="java.lang.Integer" >
+    select count(*) from admin
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update admin
+    <set >
+      <if test="record.adminId != null" >
+        admin_id = #{record.adminId,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminAccount != null" >
+        admin_account = #{record.adminAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminPassword != null" >
+        admin_password = #{record.adminPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminNickname != null" >
+        admin_nickname = #{record.adminNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminPhoto != null" >
+        admin_photo = #{record.adminPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminPhone != null" >
+        admin_phone = #{record.adminPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminEmail != null" >
+        admin_email = #{record.adminEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminQuestion != null" >
+        admin_question = #{record.adminQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminAnswer != null" >
+        admin_answer = #{record.adminAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminAddress != null" >
+        admin_address = #{record.adminAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminMoney != null" >
+        admin_money = #{record.adminMoney,jdbcType=REAL},
+      </if>
+      <if test="record.adminRegtime != null" >
+        admin_regtime = #{record.adminRegtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update admin
+    set admin_id = #{record.adminId,jdbcType=INTEGER},
+      admin_account = #{record.adminAccount,jdbcType=VARCHAR},
+      admin_password = #{record.adminPassword,jdbcType=VARCHAR},
+      admin_nickname = #{record.adminNickname,jdbcType=VARCHAR},
+      admin_photo = #{record.adminPhoto,jdbcType=VARCHAR},
+      admin_phone = #{record.adminPhone,jdbcType=VARCHAR},
+      admin_email = #{record.adminEmail,jdbcType=VARCHAR},
+      admin_question = #{record.adminQuestion,jdbcType=VARCHAR},
+      admin_answer = #{record.adminAnswer,jdbcType=VARCHAR},
+      admin_address = #{record.adminAddress,jdbcType=VARCHAR},
+      admin_money = #{record.adminMoney,jdbcType=REAL},
+      admin_regtime = #{record.adminRegtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tourism.pojo.Admin" >
+    update admin
+    <set >
+      <if test="adminAccount != null" >
+        admin_account = #{adminAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="adminPassword != null" >
+        admin_password = #{adminPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="adminNickname != null" >
+        admin_nickname = #{adminNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="adminPhoto != null" >
+        admin_photo = #{adminPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="adminPhone != null" >
+        admin_phone = #{adminPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="adminEmail != null" >
+        admin_email = #{adminEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="adminQuestion != null" >
+        admin_question = #{adminQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="adminAnswer != null" >
+        admin_answer = #{adminAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="adminAddress != null" >
+        admin_address = #{adminAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="adminMoney != null" >
+        admin_money = #{adminMoney,jdbcType=REAL},
+      </if>
+      <if test="adminRegtime != null" >
+        admin_regtime = #{adminRegtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tourism.pojo.Admin" >
+    update admin
+    set admin_account = #{adminAccount,jdbcType=VARCHAR},
+      admin_password = #{adminPassword,jdbcType=VARCHAR},
+      admin_nickname = #{adminNickname,jdbcType=VARCHAR},
+      admin_photo = #{adminPhoto,jdbcType=VARCHAR},
+      admin_phone = #{adminPhone,jdbcType=VARCHAR},
+      admin_email = #{adminEmail,jdbcType=VARCHAR},
+      admin_question = #{adminQuestion,jdbcType=VARCHAR},
+      admin_answer = #{adminAnswer,jdbcType=VARCHAR},
+      admin_address = #{adminAddress,jdbcType=VARCHAR},
+      admin_money = #{adminMoney,jdbcType=REAL},
+      admin_regtime = #{adminRegtime,jdbcType=TIMESTAMP}
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 自定义方法 -->
+  <update id="updateMoney">
+update admin set admin_money=#{adminMoney} where admin_id = #{adminId}
+</update>
+
+<update id="updateAdminPassword">
+update admin set admin_password=#{adminPassword} where admin_account = #{adminAccount}
+</update>
+
+<select id="getByMoney" resultType="float">
+select admin_money from admin where user_id = #{adminId}
+</select>
+
+<select id="findByAccount" resultMap="BaseResultMap">
+select * from admin where admin_account = #{adminAccount}
+</select>
+</mapper>

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tourism.mapper.MessageMapper" >
+  <resultMap id="BaseResultMap" type="com.tourism.pojo.Message" >
+    <id column="mess_id" property="messId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="att_id" property="attId" jdbcType="INTEGER" />
+    <result column="admin_id" property="adminId" jdbcType="INTEGER" />
+    <result column="line_id" property="lineId" jdbcType="INTEGER" />
+    <result column="is_approved" property="isApproved" jdbcType="BIT" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    mess_id, user_id, att_id, admin_id, line_id, is_approved, content
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tourism.pojo.MessageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from message
+    where mess_id = #{messId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from message
+    where mess_id = #{messId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tourism.pojo.MessageExample" >
+    delete from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tourism.pojo.Message" >
+    insert into message (mess_id, user_id, att_id, 
+      admin_id, line_id, is_approved, 
+      content)
+    values (#{messId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{attId,jdbcType=INTEGER}, 
+      #{adminId,jdbcType=INTEGER}, #{lineId,jdbcType=INTEGER}, #{isApproved,jdbcType=BIT}, 
+      #{content,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tourism.pojo.Message" >
+    insert into message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="messId != null" >
+        mess_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="attId != null" >
+        att_id,
+      </if>
+      <if test="adminId != null" >
+        admin_id,
+      </if>
+      <if test="lineId != null" >
+        line_id,
+      </if>
+      <if test="isApproved != null" >
+        is_approved,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="messId != null" >
+        #{messId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="attId != null" >
+        #{attId,jdbcType=INTEGER},
+      </if>
+      <if test="adminId != null" >
+        #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="lineId != null" >
+        #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="isApproved != null" >
+        #{isApproved,jdbcType=BIT},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tourism.pojo.MessageExample" resultType="java.lang.Integer" >
+    select count(*) from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update message
+    <set >
+      <if test="record.messId != null" >
+        mess_id = #{record.messId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.attId != null" >
+        att_id = #{record.attId,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminId != null" >
+        admin_id = #{record.adminId,jdbcType=INTEGER},
+      </if>
+      <if test="record.lineId != null" >
+        line_id = #{record.lineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.isApproved != null" >
+        is_approved = #{record.isApproved,jdbcType=BIT},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update message
+    set mess_id = #{record.messId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      att_id = #{record.attId,jdbcType=INTEGER},
+      admin_id = #{record.adminId,jdbcType=INTEGER},
+      line_id = #{record.lineId,jdbcType=INTEGER},
+      is_approved = #{record.isApproved,jdbcType=BIT},
+      content = #{record.content,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tourism.pojo.Message" >
+    update message
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="attId != null" >
+        att_id = #{attId,jdbcType=INTEGER},
+      </if>
+      <if test="adminId != null" >
+        admin_id = #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="lineId != null" >
+        line_id = #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="isApproved != null" >
+        is_approved = #{isApproved,jdbcType=BIT},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where mess_id = #{messId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tourism.pojo.Message" >
+    update message
+    set user_id = #{userId,jdbcType=INTEGER},
+      att_id = #{attId,jdbcType=INTEGER},
+      admin_id = #{adminId,jdbcType=INTEGER},
+      line_id = #{lineId,jdbcType=INTEGER},
+      is_approved = #{isApproved,jdbcType=BIT},
+      content = #{content,jdbcType=VARCHAR}
+    where mess_id = #{messId,jdbcType=INTEGER}
+  </update>
+</mapper>

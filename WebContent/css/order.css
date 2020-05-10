@@ -1,0 +1,62 @@
+#font_1{
+    font-family: 幼圆;
+    font-size: 26px;
+}
+
+#font_2{
+    font-family: 'Comic Sans MS';
+    font-size: 22px;
+}
+
+#font_3{
+    font-size: 20px;
+    font-family: 新宋体;
+}
+
+#icon_1{
+   color: #d43f3a;
+  left: 100%;
+  font-size: 70px;
+}
+
+#c1{
+    margin-top: 20px;
+    margin-bottom: 90px;
+}
+
+#star1,#star2, #star3, #star4 ,#star5{
+    width: 20px;
+    height: 20px;
+    margin-bottom: 5px;
+}
+
+#upi{
+    margin-top: 2px;
+    text-align: right;
+}
+
+#checkbox{
+    margin-top: 5px;
+    width: 15px;
+    height: 15px;
+}
+
+.c2{
+    background: #E0EEEE;
+    border: 0 ;
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,.2);
+    -o-box-shadow: 0 1px 4px rgba(0,0,0,.2);
+    box-shadow: 0 1px 4px rgba(0,0,0,.2);
+    zoom: 1;
+}
+
+#pic{
+    width: 25px;
+    height: 25px;
+}
+
+#pic1{
+    width:200px;
+    height: 150px;
+}

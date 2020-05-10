@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tourism.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.tourism.pojo.User" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_account" property="userAccount" jdbcType="VARCHAR" />
+    <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
+    <result column="user_nickname" property="userNickname" jdbcType="VARCHAR" />
+    <result column="user_photo" property="userPhoto" jdbcType="VARCHAR" />
+    <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+    <result column="user_email" property="userEmail" jdbcType="VARCHAR" />
+    <result column="user_question" property="userQuestion" jdbcType="VARCHAR" />
+    <result column="user_answer" property="userAnswer" jdbcType="VARCHAR" />
+    <result column="user_address" property="userAddress" jdbcType="VARCHAR" />
+    <result column="user_money" property="userMoney" jdbcType="REAL" />
+    <result column="user_payword" property="userPayword" jdbcType="INTEGER" />
+    <result column="user_regtime" property="userRegtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    user_id, user_account, user_password, user_nickname, user_photo, user_phone, user_email, 
+    user_question, user_answer, user_address, user_money, user_payword, user_regtime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tourism.pojo.UserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tourism.pojo.UserExample" >
+    delete from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tourism.pojo.User" >
+    insert into user (user_id, user_account, user_password, 
+      user_nickname, user_photo, user_phone, 
+      user_email, user_question, user_answer, 
+      user_address, user_money, user_payword, 
+      user_regtime)
+    values (#{userId,jdbcType=INTEGER}, #{userAccount,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
+      #{userNickname,jdbcType=VARCHAR}, #{userPhoto,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, 
+      #{userEmail,jdbcType=VARCHAR}, #{userQuestion,jdbcType=VARCHAR}, #{userAnswer,jdbcType=VARCHAR}, 
+      #{userAddress,jdbcType=VARCHAR}, #{userMoney,jdbcType=REAL}, #{userPayword,jdbcType=INTEGER}, 
+      #{userRegtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tourism.pojo.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userAccount != null" >
+        user_account,
+      </if>
+      <if test="userPassword != null" >
+        user_password,
+      </if>
+      <if test="userNickname != null" >
+        user_nickname,
+      </if>
+      <if test="userPhoto != null" >
+        user_photo,
+      </if>
+      <if test="userPhone != null" >
+        user_phone,
+      </if>
+      <if test="userEmail != null" >
+        user_email,
+      </if>
+      <if test="userQuestion != null" >
+        user_question,
+      </if>
+      <if test="userAnswer != null" >
+        user_answer,
+      </if>
+      <if test="userAddress != null" >
+        user_address,
+      </if>
+      <if test="userMoney != null" >
+        user_money,
+      </if>
+      <if test="userPayword != null" >
+        user_payword,
+      </if>
+      <if test="userRegtime != null" >
+        user_regtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userAccount != null" >
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userNickname != null" >
+        #{userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhoto != null" >
+        #{userPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null" >
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userQuestion != null" >
+        #{userQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="userAnswer != null" >
+        #{userAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddress != null" >
+        #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userMoney != null" >
+        #{userMoney,jdbcType=REAL},
+      </if>
+      <if test="userPayword != null" >
+        #{userPayword,jdbcType=INTEGER},
+      </if>
+      <if test="userRegtime != null" >
+        #{userRegtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tourism.pojo.UserExample" resultType="java.lang.Integer" >
+    select count(*) from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user
+    <set >
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userAccount != null" >
+        user_account = #{record.userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPassword != null" >
+        user_password = #{record.userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userNickname != null" >
+        user_nickname = #{record.userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPhoto != null" >
+        user_photo = #{record.userPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPhone != null" >
+        user_phone = #{record.userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userEmail != null" >
+        user_email = #{record.userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userQuestion != null" >
+        user_question = #{record.userQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAnswer != null" >
+        user_answer = #{record.userAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAddress != null" >
+        user_address = #{record.userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userMoney != null" >
+        user_money = #{record.userMoney,jdbcType=REAL},
+      </if>
+      <if test="record.userPayword != null" >
+        user_payword = #{record.userPayword,jdbcType=INTEGER},
+      </if>
+      <if test="record.userRegtime != null" >
+        user_regtime = #{record.userRegtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      user_account = #{record.userAccount,jdbcType=VARCHAR},
+      user_password = #{record.userPassword,jdbcType=VARCHAR},
+      user_nickname = #{record.userNickname,jdbcType=VARCHAR},
+      user_photo = #{record.userPhoto,jdbcType=VARCHAR},
+      user_phone = #{record.userPhone,jdbcType=VARCHAR},
+      user_email = #{record.userEmail,jdbcType=VARCHAR},
+      user_question = #{record.userQuestion,jdbcType=VARCHAR},
+      user_answer = #{record.userAnswer,jdbcType=VARCHAR},
+      user_address = #{record.userAddress,jdbcType=VARCHAR},
+      user_money = #{record.userMoney,jdbcType=REAL},
+      user_payword = #{record.userPayword,jdbcType=INTEGER},
+      user_regtime = #{record.userRegtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tourism.pojo.User" >
+    update user
+    <set >
+      <if test="userAccount != null" >
+        user_account = #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        user_password = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userNickname != null" >
+        user_nickname = #{userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhoto != null" >
+        user_photo = #{userPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null" >
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userQuestion != null" >
+        user_question = #{userQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="userAnswer != null" >
+        user_answer = #{userAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddress != null" >
+        user_address = #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userMoney != null" >
+        user_money = #{userMoney,jdbcType=REAL},
+      </if>
+      <if test="userPayword != null" >
+        user_payword = #{userPayword,jdbcType=INTEGER},
+      </if>
+      <if test="userRegtime != null" >
+        user_regtime = #{userRegtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tourism.pojo.User" >
+    update user
+    set user_account = #{userAccount,jdbcType=VARCHAR},
+      user_password = #{userPassword,jdbcType=VARCHAR},
+      user_nickname = #{userNickname,jdbcType=VARCHAR},
+      user_photo = #{userPhoto,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      user_question = #{userQuestion,jdbcType=VARCHAR},
+      user_answer = #{userAnswer,jdbcType=VARCHAR},
+      user_address = #{userAddress,jdbcType=VARCHAR},
+      user_money = #{userMoney,jdbcType=REAL},
+      user_payword = #{userPayword,jdbcType=INTEGER},
+      user_regtime = #{userRegtime,jdbcType=TIMESTAMP}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <!-- 自定义方法 -->
+  <update id="updateMoney">
+update user set user_money=#{userMoney} where user_id = #{userId}
+</update>
+
+<update id="updateUserPassword">
+update user set user_password=#{userPassword} where user_account = #{userAccount}
+</update>
+
+<select id="getByMoney" resultType="float">
+select user_money from user where user_id = #{userId}
+</select>
+
+<select id="findByAccount" resultMap="BaseResultMap">
+select * from user where user_account = #{userAccount}
+</select>
+</mapper>

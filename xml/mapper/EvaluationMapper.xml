@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tourism.mapper.EvaluationMapper" >
+  <resultMap id="BaseResultMap" type="com.tourism.pojo.Evaluation" >
+    <id column="eva_id" property="evaId" jdbcType="INTEGER" />
+    <result column="eva_content" property="evaContent" jdbcType="VARCHAR" />
+    <result column="eva_time" property="evaTime" jdbcType="TIMESTAMP" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_nickname" property="userNickname" jdbcType="VARCHAR" />
+    <result column="is_anonymous" property="isAnonymous" jdbcType="BIT" />
+    <result column="eva_grade" property="evaGrade" jdbcType="REAL" />
+    <result column="att_id" property="attId" jdbcType="INTEGER" />
+    <result column="eva_photo" property="evaPhoto" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    eva_id, eva_content, eva_time, user_id, user_nickname, is_anonymous, eva_grade, att_id, 
+    eva_photo
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tourism.pojo.EvaluationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from evaluation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from evaluation
+    where eva_id = #{evaId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from evaluation
+    where eva_id = #{evaId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tourism.pojo.EvaluationExample" >
+    delete from evaluation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tourism.pojo.Evaluation" >
+    insert into evaluation (eva_id, eva_content, eva_time, 
+      user_id, user_nickname, is_anonymous, 
+      eva_grade, att_id, eva_photo
+      )
+    values (#{evaId,jdbcType=INTEGER}, #{evaContent,jdbcType=VARCHAR}, #{evaTime,jdbcType=TIMESTAMP}, 
+      #{userId,jdbcType=INTEGER}, #{userNickname,jdbcType=VARCHAR}, #{isAnonymous,jdbcType=BIT}, 
+      #{evaGrade,jdbcType=REAL}, #{attId,jdbcType=INTEGER}, #{evaPhoto,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tourism.pojo.Evaluation" >
+    insert into evaluation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="evaId != null" >
+        eva_id,
+      </if>
+      <if test="evaContent != null" >
+        eva_content,
+      </if>
+      <if test="evaTime != null" >
+        eva_time,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userNickname != null" >
+        user_nickname,
+      </if>
+      <if test="isAnonymous != null" >
+        is_anonymous,
+      </if>
+      <if test="evaGrade != null" >
+        eva_grade,
+      </if>
+      <if test="attId != null" >
+        att_id,
+      </if>
+      <if test="evaPhoto != null" >
+        eva_photo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="evaId != null" >
+        #{evaId,jdbcType=INTEGER},
+      </if>
+      <if test="evaContent != null" >
+        #{evaContent,jdbcType=VARCHAR},
+      </if>
+      <if test="evaTime != null" >
+        #{evaTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userNickname != null" >
+        #{userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="isAnonymous != null" >
+        #{isAnonymous,jdbcType=BIT},
+      </if>
+      <if test="evaGrade != null" >
+        #{evaGrade,jdbcType=REAL},
+      </if>
+      <if test="attId != null" >
+        #{attId,jdbcType=INTEGER},
+      </if>
+      <if test="evaPhoto != null" >
+        #{evaPhoto,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tourism.pojo.EvaluationExample" resultType="java.lang.Integer" >
+    select count(*) from evaluation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update evaluation
+    <set >
+      <if test="record.evaId != null" >
+        eva_id = #{record.evaId,jdbcType=INTEGER},
+      </if>
+      <if test="record.evaContent != null" >
+        eva_content = #{record.evaContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.evaTime != null" >
+        eva_time = #{record.evaTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userNickname != null" >
+        user_nickname = #{record.userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isAnonymous != null" >
+        is_anonymous = #{record.isAnonymous,jdbcType=BIT},
+      </if>
+      <if test="record.evaGrade != null" >
+        eva_grade = #{record.evaGrade,jdbcType=REAL},
+      </if>
+      <if test="record.attId != null" >
+        att_id = #{record.attId,jdbcType=INTEGER},
+      </if>
+      <if test="record.evaPhoto != null" >
+        eva_photo = #{record.evaPhoto,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update evaluation
+    set eva_id = #{record.evaId,jdbcType=INTEGER},
+      eva_content = #{record.evaContent,jdbcType=VARCHAR},
+      eva_time = #{record.evaTime,jdbcType=TIMESTAMP},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      user_nickname = #{record.userNickname,jdbcType=VARCHAR},
+      is_anonymous = #{record.isAnonymous,jdbcType=BIT},
+      eva_grade = #{record.evaGrade,jdbcType=REAL},
+      att_id = #{record.attId,jdbcType=INTEGER},
+      eva_photo = #{record.evaPhoto,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tourism.pojo.Evaluation" >
+    update evaluation
+    <set >
+      <if test="evaContent != null" >
+        eva_content = #{evaContent,jdbcType=VARCHAR},
+      </if>
+      <if test="evaTime != null" >
+        eva_time = #{evaTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userNickname != null" >
+        user_nickname = #{userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="isAnonymous != null" >
+        is_anonymous = #{isAnonymous,jdbcType=BIT},
+      </if>
+      <if test="evaGrade != null" >
+        eva_grade = #{evaGrade,jdbcType=REAL},
+      </if>
+      <if test="attId != null" >
+        att_id = #{attId,jdbcType=INTEGER},
+      </if>
+      <if test="evaPhoto != null" >
+        eva_photo = #{evaPhoto,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where eva_id = #{evaId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tourism.pojo.Evaluation" >
+    update evaluation
+    set eva_content = #{evaContent,jdbcType=VARCHAR},
+      eva_time = #{evaTime,jdbcType=TIMESTAMP},
+      user_id = #{userId,jdbcType=INTEGER},
+      user_nickname = #{userNickname,jdbcType=VARCHAR},
+      is_anonymous = #{isAnonymous,jdbcType=BIT},
+      eva_grade = #{evaGrade,jdbcType=REAL},
+      att_id = #{attId,jdbcType=INTEGER},
+      eva_photo = #{evaPhoto,jdbcType=VARCHAR}
+    where eva_id = #{evaId,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 自定义方法 -->
+  <select id="selectByUserId" resultMap="BaseResultMap">
+select * from evaluation where user_Id = #{userId}
+</select>
+
+<select id="selectByAttId" resultMap="BaseResultMap">
+select * from evaluation where att_Id = #{attId}
+</select>
+
+<select id="selectAll" resultMap="BaseResultMap">
+select * from evaluation 
+</select>
+</mapper>

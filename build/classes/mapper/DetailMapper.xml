@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tourism.mapper.DetailMapper" >
+  <resultMap id="BaseResultMap" type="com.tourism.pojo.Detail" >
+    <id column="line_id" property="lineId" jdbcType="INTEGER" />
+    <result column="detail_start" property="detailStart" jdbcType="VARCHAR" />
+    <result column="detail_end" property="detailEnd" jdbcType="VARCHAR" />
+    <result column="detail_line" property="detailLine" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    line_id, detail_start, detail_end, detail_line
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tourism.pojo.DetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from detail
+    where line_id = #{lineId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from detail
+    where line_id = #{lineId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tourism.pojo.DetailExample" >
+    delete from detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tourism.pojo.Detail" >
+    insert into detail (line_id, detail_start, detail_end, 
+      detail_line)
+    values (#{lineId,jdbcType=INTEGER}, #{detailStart,jdbcType=VARCHAR}, #{detailEnd,jdbcType=VARCHAR}, 
+      #{detailLine,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tourism.pojo.Detail" >
+    insert into detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="lineId != null" >
+        line_id,
+      </if>
+      <if test="detailStart != null" >
+        detail_start,
+      </if>
+      <if test="detailEnd != null" >
+        detail_end,
+      </if>
+      <if test="detailLine != null" >
+        detail_line,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="lineId != null" >
+        #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="detailStart != null" >
+        #{detailStart,jdbcType=VARCHAR},
+      </if>
+      <if test="detailEnd != null" >
+        #{detailEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="detailLine != null" >
+        #{detailLine,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tourism.pojo.DetailExample" resultType="java.lang.Integer" >
+    select count(*) from detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update detail
+    <set >
+      <if test="record.lineId != null" >
+        line_id = #{record.lineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.detailStart != null" >
+        detail_start = #{record.detailStart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailEnd != null" >
+        detail_end = #{record.detailEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailLine != null" >
+        detail_line = #{record.detailLine,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update detail
+    set line_id = #{record.lineId,jdbcType=INTEGER},
+      detail_start = #{record.detailStart,jdbcType=VARCHAR},
+      detail_end = #{record.detailEnd,jdbcType=VARCHAR},
+      detail_line = #{record.detailLine,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tourism.pojo.Detail" >
+    update detail
+    <set >
+      <if test="detailStart != null" >
+        detail_start = #{detailStart,jdbcType=VARCHAR},
+      </if>
+      <if test="detailEnd != null" >
+        detail_end = #{detailEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="detailLine != null" >
+        detail_line = #{detailLine,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where line_id = #{lineId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tourism.pojo.Detail" >
+    update detail
+    set detail_start = #{detailStart,jdbcType=VARCHAR},
+      detail_end = #{detailEnd,jdbcType=VARCHAR},
+      detail_line = #{detailLine,jdbcType=VARCHAR}
+    where line_id = #{lineId,jdbcType=INTEGER}
+  </update>
+</mapper>

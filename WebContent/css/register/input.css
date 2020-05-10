@@ -1,0 +1,325 @@
+.input_main{
+    width:100%;
+    height:80px;
+    background-color:rgb(16,123,248);
+	
+}
+body{
+	 overflow-x:hidden;
+}
+.input_head_1{
+	margin:0 auto;
+    width: 1100px;
+    height:80px;
+    line-height: 38px;
+}
+.input_head_1 p{
+	float:left;
+	height:80px;
+	line-height:80px;
+}
+.input_head_font_1{
+	color: rgb(255, 255, 255);
+    position: absolute;
+    font-size: 24px;
+    font-family: 微软雅黑;
+	position: absolute;
+	left: 200px;
+}.input_head_font_2{
+	width:100%;
+	height:80px;
+	line-height:80px;
+	margin-left:500px;
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    font-family: 微软雅黑;
+    text-decoration: none;
+}
+.input_head_font_3{
+	width:100%;
+	height:80px;
+	line-height:80px;
+	margin-left:500px;
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    font-family: 微软雅黑;
+    text-decoration: none;
+}
+.middle_main{
+	width:100%;
+    height:120px;
+    background-color:rgb(235,235,245);
+	
+}
+.middle_main_1{
+	margin:0 auto;
+    width: 700px;
+    height:120px;
+    line-height: 38px;
+	position:fixed;
+	left:0;
+	right:0;
+	
+}.middle_main_1>div>p{
+	position: relative;
+    top: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+    margin-top: -8px;
+    color: #a5a5a5;
+}.middle_main_1 div i{
+	font-size: 24px;
+    font-weight: border;
+    font-style: normal;
+    text-align: center;
+    line-height: 60px;
+    color: #fff;
+    float: left;
+    width: 60px;
+    height: 60px;
+    background-image: url(../../image/register/1.png);
+}
+
+.middle_main_1 >div{
+	margin-top:17px;
+	float: left;
+    height: 30px;
+}.middle_main_1> i{
+	margin-top:15px;
+	position: relative;
+    top: 30px;
+    margin-left: -3px;
+    width: 150px;
+    float: left;
+    height: 8px;
+    background-image: url(../../image/register/line2.png);
+}
+.form{
+    width:100%;
+    height:270px;
+    
+	margin-top:-10px;
+	float:left;
+}
+.form_01{
+    width: 1100px;
+    height:250px;
+    line-height: 50px;
+	margin:0px auto;
+}
+.form_02{
+	margin:0px auto;
+	margin-top:60px;
+	width: 500px;
+    height: 250px;
+   -moz-box-shadow: 2px 2px 10px #909090;
+    -webkit-box-shadow: 2px 2px 10px #909090;
+    box-shadow: 2px 2px 10px #909090;
+}.form_02>p{
+	display: inline-block;
+    vertical-align: middle;
+    cursor: default;
+    font-size: 16px;
+    line-height: 32px;
+    margin-left: 50px;
+}
+#username{
+	margin-left: 50px;
+    width: 297px;
+    height: 30px;
+	background-color: transparent;
+    border: 1px solid #999;
+    outline: none;
+}
+#slider1{
+	margin-top:10px;
+	margin-left: 50px;
+	
+}
+.submit{
+	margin-left: 170px;
+    width: 150px;
+    height: 40px;
+    border: none;
+    margin-top: 20px;
+    font-size: 18px;
+    background-color: #2f86f6;
+    color: #fff;
+}.submit:hover{
+	    opacity: .7;
+}
+#mess{
+	color:red;
+	font-size:12px;
+}
+
+
+
+#preloader {
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background-color:#fff; /* change if the mask should have another color then white */
+  z-index:99; /* makes sure it stays on top */
+}
+
+#status {
+  width:200px;
+  height:200px;
+  position:absolute;
+  left:50%; /* centers the loading animation horizontally one the screen */
+  top:50%; /* centers the loading animation vertically one the screen */
+  background-image:url(../../image/register/preloader.gif); /* path to your loading animation */
+  background-repeat:no-repeat;
+  background-position:center;
+  margin:-100px 0 0 -100px; /* is width and height divided by two */
+}.sign{
+	margin-top:50px;
+	width:100%;
+    height:500px;
+}
+.sign_01{
+	margin:0 auto;
+    width: 1100px;
+    height:500px;
+}.sign_02{
+	margin:0 auto;
+    width: 900px;
+    height:400px;
+	-moz-box-shadow: 2px 2px 10px #909090;
+    -webkit-box-shadow: 2px 2px 10px #909090;
+    box-shadow: 2px 2px 10px #909090;
+}.sign_02>p{
+	margin-top:20px;
+	text-align:center;
+	display: inline-block;
+    vertical-align: middle;
+    cursor: default;
+    font-size: 18px;
+    line-height: 16px;
+	height:16px;
+	width:900px;
+}.sign_03{
+	margin-top:35px;
+	border-right:1px solid #999;
+	margin-left:50px;
+	width:400px;
+	height:230px;
+	float:left;
+	
+	
+}.sign_04{
+	float:left;
+	margin-top:35px;
+	width:400px;
+	height:230px;
+	float:left;
+}.input{
+	margin-left: 50px;
+    width: 250px;
+    height: 30px;
+	font-size:16px;
+	background-color: transparent;
+    outline: none;
+	border:none;
+    border-bottom: 1px solid #888;
+	margin-top:20px;
+}.submit_10{
+	width:200px;
+	height:50px;
+	background-color:#888;
+	margin-top:20px;
+	margin-left:350px;
+	font-size:18px;
+	border: none;
+	background-color: #2f86f6;
+    color: #fff;
+}.submit_10:hover{
+	opacity: .7;
+}
+.sign_21{
+	margin:0 auto;
+    width: 1100px;
+    height:500px;
+}.sign_22{
+	margin:0 auto;
+    width: 900px;
+    height:400px;
+	
+}.sign_22>p{
+	color:rgb(16,123,248);
+	margin-top:20px;
+	text-align:center;
+	display: inline-block;
+    vertical-align: middle;
+    cursor: default;
+    font-size: 24px;
+    line-height: 16px;
+	height:16px;
+	width:900px;
+}.sign_23{
+	margin-top:35px;
+	margin-left:50px;
+	width:400px;
+	height:300px;
+	float:left;
+	
+	border-right:none;
+	
+}.sign_24{
+	
+	float:left;
+	margin-top:35px;
+	width:400px;
+	height:300px;
+	float:left;
+}.sign_24:hover{
+	-moz-box-shadow: 2px 2px 10px #909090;
+    -webkit-box-shadow: 2px 2px 10px #909090;
+    box-shadow: 2px 2px 10px #909090;
+	transition: all .7s;
+}
+.sign_23:hover{
+	-moz-box-shadow: 2px 2px 10px #909090;
+    -webkit-box-shadow: 2px 2px 10px #909090;
+    box-shadow: 2px 2px 10px #909090;
+	transition: all .7s;
+}.sign_23>div{
+	width:250px;
+	height:250px;
+	margin:0 auto;
+	margin-top:10px;
+	background:url("../../image/register/user.png");
+}
+.sign_24>div{
+	width:250px;
+	height:250px;
+	margin:0 auto;
+	margin-top:10px;
+	background:url("../../image/register/admin.png");
+}.sign_24>p{
+	width:400px;
+	text-align:center;
+	height:40px;
+	font-size:20px;
+	line-height:40px;
+	color:#555;
+}
+.sign_24:hover>p{
+	color:#000;
+	transition: all .7s;
+}.sign_23>p{
+	width:400px;
+	text-align:center;
+	height:40px;
+	font-size:20px;
+	line-height:40px;
+	color:#555;
+}
+.sign_23:hover>p{
+	color:#000;
+	transition: all .7s;
+}

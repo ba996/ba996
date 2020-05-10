@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tourism.mapper.AttractionMapper" >
+  <resultMap id="BaseResultMap" type="com.tourism.pojo.Attraction" >
+    <id column="att_id" property="attId" jdbcType="INTEGER" />
+    <result column="admin_id" property="adminId" jdbcType="INTEGER" />
+    <result column="att_name" property="attName" jdbcType="VARCHAR" />
+    <result column="att_price" property="attPrice" jdbcType="REAL" />
+    <result column="att_ photo" property="attPhoto" jdbcType="VARCHAR" />
+    <result column="att_address" property="attAddress" jdbcType="VARCHAR" />
+    <result column="att_introduce" property="attIntroduce" jdbcType="VARCHAR" />
+    <result column="att_grade" property="attGrade" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    att_id, admin_id, att_name, att_price, "att_ photo", att_address, att_introduce, 
+    att_grade
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tourism.pojo.AttractionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from attraction
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from attraction
+    where att_id = #{attId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from attraction
+    where att_id = #{attId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tourism.pojo.AttractionExample" >
+    delete from attraction
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tourism.pojo.Attraction" >
+    insert into attraction (att_id, admin_id, att_name, 
+      att_price, "att_ photo", att_address, 
+      att_introduce, att_grade)
+    values (#{attId,jdbcType=INTEGER}, #{adminId,jdbcType=INTEGER}, #{attName,jdbcType=VARCHAR}, 
+      #{attPrice,jdbcType=REAL}, #{attPhoto,jdbcType=VARCHAR}, #{attAddress,jdbcType=VARCHAR}, 
+      #{attIntroduce,jdbcType=VARCHAR}, #{attGrade,jdbcType=REAL})
+  </insert>
+ <insert id="insertSelective" parameterType="com.tourism.pojo.Attraction" >
+    insert into attraction
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="attId != null" >
+        att_id,
+      </if>
+      <if test="adminId != null" >
+        admin_id,
+      </if>
+      <if test="attName != null" >
+        att_name,
+      </if>
+      <if test="attPrice != null" >
+        att_price,
+      </if>
+      <if test="attPhoto != null" >
+        "att_ photo",
+      </if>
+      <if test="attAddress != null" >
+        att_address,
+      </if>
+      <if test="attIntroduce != null" >
+        att_introduce,
+      </if>
+      <if test="attGrade != null" >
+        att_grade,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="attId != null" >
+        #{attId,jdbcType=INTEGER},
+      </if>
+      <if test="adminId != null" >
+        #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="attName != null" >
+        #{attName,jdbcType=VARCHAR},
+      </if>
+      <if test="attPrice != null" >
+        #{attPrice,jdbcType=REAL},
+      </if>
+      <if test="attPhoto != null" >
+        #{attPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="attAddress != null" >
+        #{attAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="attIntroduce != null" >
+        #{attIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="attGrade != null" >
+        #{attGrade,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tourism.pojo.AttractionExample" resultType="java.lang.Integer" >
+    select count(*) from attraction
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update attraction
+    <set >
+      <if test="record.attId != null" >
+        att_id = #{record.attId,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminId != null" >
+        admin_id = #{record.adminId,jdbcType=INTEGER},
+      </if>
+      <if test="record.attName != null" >
+        att_name = #{record.attName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attPrice != null" >
+        att_price = #{record.attPrice,jdbcType=REAL},
+      </if>
+      <if test="record.attPhoto != null" >
+        "att_ photo" = #{record.attPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attAddress != null" >
+        att_address = #{record.attAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attIntroduce != null" >
+        att_introduce = #{record.attIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attGrade != null" >
+        att_grade = #{record.attGrade,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update attraction
+    set att_id = #{record.attId,jdbcType=INTEGER},
+      admin_id = #{record.adminId,jdbcType=INTEGER},
+      att_name = #{record.attName,jdbcType=VARCHAR},
+      att_price = #{record.attPrice,jdbcType=REAL},
+      "att_ photo" = #{record.attPhoto,jdbcType=VARCHAR},
+      att_address = #{record.attAddress,jdbcType=VARCHAR},
+      att_introduce = #{record.attIntroduce,jdbcType=VARCHAR},
+      att_grade = #{record.attGrade,jdbcType=REAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tourism.pojo.Attraction" >
+    update attraction
+    <set >
+      <if test="adminId != null" >
+        admin_id = #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="attName != null" >
+        att_name = #{attName,jdbcType=VARCHAR},
+      </if>
+      <if test="attPrice != null" >
+        att_price = #{attPrice,jdbcType=REAL},
+      </if>
+      <if test="attPhoto != null" >
+        "att_ photo" = #{attPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="attAddress != null" >
+        att_address = #{attAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="attIntroduce != null" >
+        att_introduce = #{attIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="attGrade != null" >
+        att_grade = #{attGrade,jdbcType=REAL},
+      </if>
+    </set>
+    where att_id = #{attId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tourism.pojo.Attraction" >
+    update attraction
+    set admin_id = #{adminId,jdbcType=INTEGER},
+      att_name = #{attName,jdbcType=VARCHAR},
+      att_price = #{attPrice,jdbcType=REAL},
+      "att_ photo" = #{attPhoto,jdbcType=VARCHAR},
+      att_address = #{attAddress,jdbcType=VARCHAR},
+      att_introduce = #{attIntroduce,jdbcType=VARCHAR},
+      att_grade = #{attGrade,jdbcType=REAL}
+    where att_id = #{attId,jdbcType=INTEGER}
+  </update>
+  
+    <!--自定义方法 -->
+    
+ <update id="updateGrade">
+update attraction set att_grade=#{attGrade} where att_id = #{attId}
+</update>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+select * from attraction 
+</select>
+
+<select id="selectByName" resultMap="BaseResultMap">
+select * from attraction where att_name = #{attName}
+</select>
+
+<select id="selectFuzzy" resultMap="BaseResultMap">
+select * from attraction where att_name like "%"#{attName}"%"
+</select>
+
+<select id="selectByCity" resultMap="BaseResultMap">
+select * from attraction where att_address like "%"#{attAddress}"%"
+</select>
+</mapper>

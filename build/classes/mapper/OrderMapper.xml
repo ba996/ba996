@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tourism.mapper.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.tourism.pojo.Order" >
+    <id column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="att_id" property="attId" jdbcType="INTEGER" />
+    <result column="att_price" property="attPrice" jdbcType="REAL" />
+    <result column="order_time" property="orderTime" jdbcType="TIMESTAMP" />
+    <result column="order_number" property="orderNumber" jdbcType="INTEGER" />
+    <result column="order_money" property="orderMoney" jdbcType="REAL" />
+    <result column="att_name" property="attName" jdbcType="VARCHAR" />
+    <result column="is_evaluation" property="isEvaluation" jdbcType="BIT" />
+    <result column="is_order" property="isOrder" jdbcType="BIT" />
+    <result column="is_delete" property="isDelete" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    order_id, user_id, att_id, att_price, order_time, order_number, order_money, att_name, 
+    is_evaluation, is_order, is_delete
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tourism.pojo.OrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from orders
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from orders
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tourism.pojo.OrderExample" >
+    delete from orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tourism.pojo.Order" >
+    insert into orders (order_id, user_id, att_id, 
+      att_price, order_time, order_number, 
+      order_money, att_name, is_evaluation, 
+      is_order, is_delete)
+    values (#{orderId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{attId,jdbcType=INTEGER}, 
+      #{attPrice,jdbcType=REAL}, #{orderTime,jdbcType=TIMESTAMP}, #{orderNumber,jdbcType=INTEGER}, 
+      #{orderMoney,jdbcType=REAL}, #{attName,jdbcType=VARCHAR}, #{isEvaluation,jdbcType=BIT}, 
+      #{isOrder,jdbcType=BIT}, #{isDelete,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tourism.pojo.Order" >
+    insert into orders
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="attId != null" >
+        att_id,
+      </if>
+      <if test="attPrice != null" >
+        att_price,
+      </if>
+      <if test="orderTime != null" >
+        order_time,
+      </if>
+      <if test="orderNumber != null" >
+        order_number,
+      </if>
+      <if test="orderMoney != null" >
+        order_money,
+      </if>
+      <if test="attName != null" >
+        att_name,
+      </if>
+      <if test="isEvaluation != null" >
+        is_evaluation,
+      </if>
+      <if test="isOrder != null" >
+        is_order,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="attId != null" >
+        #{attId,jdbcType=INTEGER},
+      </if>
+      <if test="attPrice != null" >
+        #{attPrice,jdbcType=REAL},
+      </if>
+      <if test="orderTime != null" >
+        #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderNumber != null" >
+        #{orderNumber,jdbcType=INTEGER},
+      </if>
+      <if test="orderMoney != null" >
+        #{orderMoney,jdbcType=REAL},
+      </if>
+      <if test="attName != null" >
+        #{attName,jdbcType=VARCHAR},
+      </if>
+      <if test="isEvaluation != null" >
+        #{isEvaluation,jdbcType=BIT},
+      </if>
+      <if test="isOrder != null" >
+        #{isOrder,jdbcType=BIT},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tourism.pojo.OrderExample" resultType="java.lang.Integer" >
+    select count(*) from orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update orders
+    <set >
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.attId != null" >
+        att_id = #{record.attId,jdbcType=INTEGER},
+      </if>
+      <if test="record.attPrice != null" >
+        att_price = #{record.attPrice,jdbcType=REAL},
+      </if>
+      <if test="record.orderTime != null" >
+        order_time = #{record.orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orderNumber != null" >
+        order_number = #{record.orderNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderMoney != null" >
+        order_money = #{record.orderMoney,jdbcType=REAL},
+      </if>
+      <if test="record.attName != null" >
+        att_name = #{record.attName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isEvaluation != null" >
+        is_evaluation = #{record.isEvaluation,jdbcType=BIT},
+      </if>
+      <if test="record.isOrder != null" >
+        is_order = #{record.isOrder,jdbcType=BIT},
+      </if>
+      <if test="record.isDelete != null" >
+        is_delete = #{record.isDelete,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update orders
+    set order_id = #{record.orderId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      att_id = #{record.attId,jdbcType=INTEGER},
+      att_price = #{record.attPrice,jdbcType=REAL},
+      order_time = #{record.orderTime,jdbcType=TIMESTAMP},
+      order_number = #{record.orderNumber,jdbcType=INTEGER},
+      order_money = #{record.orderMoney,jdbcType=REAL},
+      att_name = #{record.attName,jdbcType=VARCHAR},
+      is_evaluation = #{record.isEvaluation,jdbcType=BIT},
+      is_order = #{record.isOrder,jdbcType=BIT},
+      is_delete = #{record.isDelete,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tourism.pojo.Order" >
+    update orders
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="attId != null" >
+        att_id = #{attId,jdbcType=INTEGER},
+      </if>
+      <if test="attPrice != null" >
+        att_price = #{attPrice,jdbcType=REAL},
+      </if>
+      <if test="orderTime != null" >
+        order_time = #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderNumber != null" >
+        order_number = #{orderNumber,jdbcType=INTEGER},
+      </if>
+      <if test="orderMoney != null" >
+        order_money = #{orderMoney,jdbcType=REAL},
+      </if>
+      <if test="attName != null" >
+        att_name = #{attName,jdbcType=VARCHAR},
+      </if>
+      <if test="isEvaluation != null" >
+        is_evaluation = #{isEvaluation,jdbcType=BIT},
+      </if>
+      <if test="isOrder != null" >
+        is_order = #{isOrder,jdbcType=BIT},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=BIT},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tourism.pojo.Order" >
+    update orders
+    set user_id = #{userId,jdbcType=INTEGER},
+      att_id = #{attId,jdbcType=INTEGER},
+      att_price = #{attPrice,jdbcType=REAL},
+      order_time = #{orderTime,jdbcType=TIMESTAMP},
+      order_number = #{orderNumber,jdbcType=INTEGER},
+      order_money = #{orderMoney,jdbcType=REAL},
+      att_name = #{attName,jdbcType=VARCHAR},
+      is_evaluation = #{isEvaluation,jdbcType=BIT},
+      is_order = #{isOrder,jdbcType=BIT},
+      is_delete = #{isDelete,jdbcType=BIT}
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+   <!-- 自定义方法 -->
+  <update id="updateOrder">
+update orders set is_delete = #{isDelete} where order_id = #{orderId}
+</update>
+
+<select id="selectAll" resultMap="BaseResultMap">
+select * from orders 
+</select>
+
+<select id="selectUserAll" resultMap="BaseResultMap">
+select * from orders where user_id = #{userId}
+</select>
+
+<select id="selectIsOrder" resultMap="BaseResultMap">
+select * from orders where user_id = #{userId} and is_order= #{isOrder} order by order_time desc
+</select>
+
+<select id="selectIsEva" resultMap="BaseResultMap">
+select * from orders where user_id = #{userId} and is_evaluation= #{isEvaluation} order by order_time desc
+</select>
+
+
+<select id="selectIsOrder2" resultMap="BaseResultMap">
+select * from orders where att_id = #{attId} and is_order= #{isOrder} order by order_time desc
+</select>
+
+<select id="selectOrderTime" resultMap="BaseResultMap">
+select * from orders where orderTime = #{orderTime} 
+</select>
+
+</mapper>

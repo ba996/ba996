@@ -1,0 +1,65 @@
+.demo2{
+    padding: 2em;
+}
+.serviceBox{
+    border: 1px solid #ededed;
+    padding: 30px 30px 30px 90px;
+    position: relative;
+    transition: all 0.5s ease 0s;
+}
+.serviceBox:hover{
+    border-color: #41d7f7;
+}
+.serviceBox:before,
+.serviceBox:after{
+    content: "";
+    display: block;
+    width: 50px;
+    height: 5px;
+    background: #41d7f7;
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    transition: all 0.5s ease 0s;
+}
+.serviceBox:before{
+    top: -3px;
+}
+.serviceBox:after{
+    bottom: -3px;
+}
+.serviceBox:hover:before,
+.serviceBox:hover:after{
+    left: 40px;
+    opacity: 1;
+}
+.serviceBox .service-icon{
+    display: inline-block;
+    position: absolute;
+    top: 33%;
+    left: 23px;
+    font-size: 45px;
+    color: #41d7f7;
+    opacity: 0.3;
+    transition: all 0.5s ease-in 0s;
+}
+.serviceBox:hover .service-icon{
+    opacity: 1;
+}
+.serviceBox a:hover{
+    color: #41d7f7;
+}
+.serviceBox .title{
+    font-size: 16px;
+    font-weight: 700;
+    color: #41d7f7;
+    margin-bottom: 15px;
+}
+.serviceBox .description{
+    font-size: 13px;
+    color: #666;
+    line-height: 20px;
+}
+@media only screen and (max-width: 990px){
+    .serviceBox{ margin-bottom: 30px; }
+}

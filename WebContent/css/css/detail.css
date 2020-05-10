@@ -1,0 +1,138 @@
+.de_1{
+	width:200px; 
+	height:200px; 
+	border-radius:50%; 
+	overflow:hidden;
+	margin: 10px auto;
+}
+.title_1{
+	margin: 0 auto;
+	width:500px; 
+	height:20px; 
+	text-align: center;
+	margin-top: 10px;
+	font-size: 22px;
+	font-weight: bolder;
+	color: #666;
+}.de_2{
+	margin: 0 auto;
+	width:500px;  
+}.show_pic{
+	width:900px; 
+	margin: 0 auto;
+}.show_pic_1{
+	width:200px; 
+	height:150px;
+	overflow:hidden;
+	float: left;
+	margin-left: 23px;
+}#show{
+	width:200px; 
+	height:150px;
+	
+}.de_3{
+	margin: 0 auto;
+	width:900px;
+}.title_2{
+	color: #777;
+	font-size: 18px;
+}.inter_1{
+	margin: 0 auto;
+	width:900px;
+}.inter_2{
+	margin-top: 20px;
+	
+}.inter_2{
+	color: #777;
+	font-size: 18px;
+}.inter_3{
+	margin: 0 auto;
+	width:800px;
+	color: #444;
+	font-size: 16px;
+}
+.ping_1{
+	margin: 0 auto;
+	width:900px;
+}
+.ping_1>p{
+	color: #777;
+	font-size: 18px;
+}
+.pin_1{
+	margin: 20px auto;
+	width:900px;
+	border-bottom: 1px solid #888;
+	color: #444;
+	font-size: 16px;
+}.my_font_1{
+	word-wrap:break-word; 
+	margin-top: 20px;
+}.yuding{
+	float: right;
+}.de_20{
+	margin: 0 auto;
+	width:900px;
+} * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #nav {
+            width: 800px;
+            height: 40px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        #nav ul {
+            list-style: none;
+            width: 800px;
+            text-align: center;
+        }
+
+        #nav ul li {
+            float: left;
+            line-height: 40px;
+            text-align: center;
+            position: relative;
+            width: 800px;
+            text-align: center;
+        }
+
+        #nav ul li a {
+            text-decoration: none;
+            color: #000;
+            display: block;
+            padding: 0px 10px;
+        }
+
+        #nav ul li a:hover {
+            color: #FFF;
+            background: #333;
+        }
+
+        #nav ul li ul {
+            position: absolute;
+            display: none;
+			z-index:1000;
+			background:#fff;
+        }
+
+        #nav ul li ul li {
+            float: none;
+            line-height: 30px;
+            text-align: center;
+        }
+
+        #nav ul li ul li a {
+            
+        }
+
+        #nav ul li ul li a:hover {
+            background-color: #888;
+        }
+
+        #nav ul li:hover ul {
+            display: block
+        }
